@@ -8,7 +8,10 @@
   --color-text-primary: #111111;
   --font-sans: var(--font-geist), sans-serif;
 }
+* {
+    border: red solid 10px; 
 
+}
 body {
   cursor: url('/images/1.png') 0 0, auto;
   overflow-x: hidden;
