@@ -10,11 +10,11 @@ import ProjectIcon from "@/components/icons/ProjectIcon";
 import ContactIcon from "@/components/icons/ContactIcon";
 
 const NAV_ITEMS = [
-  { icon: HomeIcon, label: "Home" },
-  { icon: AboutIcon, label: "About" },
-  { icon: CareerIcon, label: "Career" },
-  { icon: ProjectIcon, label: "Project" },
-  { icon: ContactIcon, label: "Contact" },
+  { icon: HomeIcon, label: "Home", id: "home" },
+  { icon: AboutIcon, label: "About", id: "about" },
+  { icon: CareerIcon, label: "Career", id: "career" },
+  { icon: ProjectIcon, label: "Project", id: "project" },
+  { icon: ContactIcon, label: "Contact", id: "contact" },
 ];
 
 export default function Navbar() {
@@ -72,8 +72,11 @@ export default function Navbar() {
             ref={(el) => {
               itemRefs.current[idx] = el;
             }}
-            onClick={() => setActive(idx)}
-            aria-label={item.label}
+              onClick={() => {
+                setActive(idx);
+                document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}           
+              aria-label={item.label}
             // lebar/padding TANPA transisi CSS -> berubah instan, biar getBoundingClientRect
             // selalu baca ukuran final, bukan ukuran di tengah animasi
             className={`group relative z-10 flex h-11 shrink-0 items-center justify-center

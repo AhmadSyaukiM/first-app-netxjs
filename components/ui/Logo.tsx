@@ -64,15 +64,17 @@ export default function Logo() {
   }, [phase, text]);
 
   return (
-    // "fixed" -> "absolute": sekarang nempelnya relatif ke parent section (Home),
-    // bukan ke viewport, jadi akan ikut ke-scroll away bareng section Home
-    <div className="absolute left-6 top-6 z-40 flex items-center gap-2 font-extrabold text-2xl">
-      <svg viewBox="0 0 24 24" className="h-5 w-5 -scale-x-100" aria-hidden>
-        <polygon points="4,2 20,12 4,22" fill="black" />
+    <div className="absolute left-6 top-6 z-40 flex h-8 items-center gap-2 font-extrabold text-2xl">
+      <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 -scale-x-100" aria-hidden>
+        <polygon points="20,2 4,12 20,22" fill="black" />
       </svg>
-      <span className="tabular-nums">{text}</span>
+
+      {/* leading-none: matikan line-height ekstra dari font, biar teks & container tetap stabil
+          tingginya walau kontennya berubah-ubah (kosong -> penuh -> kosong lagi) */}
+      <span className="tabular-nums leading-none">{text}</span>
+
       <span
-        className={`w-[2.5px] h-6 bg-black inline-block transition-opacity duration-150 ${
+        className={`w-[2.5px] h-6 shrink-0 bg-black inline-block transition-opacity duration-150 ${
           cursorVisible ? "opacity-100" : "opacity-0"
         }`}
       />
