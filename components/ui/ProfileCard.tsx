@@ -12,7 +12,7 @@ export default function ProfileCard() {
       {/* circle gradient primary di belakang - full circle, tidak lagi bisa kepotong */}
       <div
         aria-hidden
-        className="absolute -bottom-10 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/50 blur-[80px]"
+        className="absolute -bottom-0 left-1/2 -z-10 h-72 w-72 -translate-x-1/5 rounded-full bg-primary/100 blur-[80px]"
       />
 
       <svg

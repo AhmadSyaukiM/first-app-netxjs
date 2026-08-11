@@ -17,7 +17,7 @@ const ROWS = [
 export default function ConnectPanel() {
   return (
     <div className="flex w-full flex-col items-center lg:items-start">
-      <h3 className="text-3xl font-extrabold leading-tight text-black sm:text-6xl">
+      <h3 className="text-5xl font-extrabold leading-tight text-black sm:text-6xl">
         Connect
         <br />
         With <span className="text-primary">Me !</span>

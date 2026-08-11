@@ -23,6 +23,11 @@ export default function Navbar() {
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLElement | null>(null);
 
+  // flag: true selama proses scroll akibat KLIK navbar (bukan scroll manual user)
+  // supaya scroll-spy tidak "berebut" mengubah active di tengah animasi smooth-scroll
+  const isClickScrolling = useRef(false);
+  const clickScrollTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
   const measurePill = () => {
     const el = itemRefs.current[active];
     const container = containerRef.current;
@@ -32,8 +37,6 @@ export default function Navbar() {
     setPillStyle({ left: elRect.left - containerRect.left, width: elRect.width });
   };
 
-  // ukur ulang tiap kali "active" berubah, DAN sesudah browser selesai
-  // layout (double rAF) supaya lebar final sudah pasti fix, bukan lebar transisi
   useLayoutEffect(() => {
     measurePill();
     const raf1 = requestAnimationFrame(() => {
@@ -49,6 +52,57 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", measurePill);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
+
+  // ================================
+  // SCROLL-SPY: navbar otomatis ikut section yang sedang dilihat user
+  // ================================
+  useEffect(() => {
+    const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(
+      (el): el is HTMLElement => el !== null
+    );
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // kalau lagi proses klik-scroll, abaikan dulu, biar tidak konflik
+        if (isClickScrolling.current) return;
+
+        // dari semua section yang sedang terlihat, ambil yang paling dominan di layar
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length > 0) {
+          const sectionId = visible[0].target.id;
+          const idx = NAV_ITEMS.findIndex((item) => item.id === sectionId);
+          if (idx !== -1) setActive(idx);
+        }
+      },
+      {
+        // area "deteksi" difokuskan ke tengah layar, supaya section dianggap aktif
+        // begitu bagian utamanya sudah masuk area pandang tengah, bukan cuma nyenggol tepi
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleNavClick = (idx: number, id: string) => {
+    isClickScrolling.current = true;
+    setActive(idx);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // lepas "kunci" scroll-spy setelah animasi smooth-scroll selesai
+    // (kasih jeda aman, karena durasi smooth-scroll bervariasi tergantung jarak)
+    clearTimeout(clickScrollTimeout.current);
+    clickScrollTimeout.current = setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 1000);
+  };
 
   return (
     <nav
@@ -72,13 +126,8 @@ export default function Navbar() {
             ref={(el) => {
               itemRefs.current[idx] = el;
             }}
-              onClick={() => {
-                setActive(idx);
-                document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}           
-              aria-label={item.label}
-            // lebar/padding TANPA transisi CSS -> berubah instan, biar getBoundingClientRect
-            // selalu baca ukuran final, bukan ukuran di tengah animasi
+            onClick={() => handleNavClick(idx, item.id)}
+            aria-label={item.label}
             className={`group relative z-10 flex h-11 shrink-0 items-center justify-center
                         gap-2 overflow-hidden rounded-full
                         sm:h-12

@@ -23,17 +23,13 @@ a {
 }
 
 @layer components {
- .glass {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1.5px solid rgba(0, 0, 0, 0.5);
-
-  backdrop-filter: blur(70px) saturate(200%);
-  -webkit-backdrop-filter: blur(70px) saturate(200%);
-
-  box-shadow:
-    0 29px 106.9px -40px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
+  .glass {
+    background-color: rgba(255, 255, 255, 0.18);
+    border: 1.5px solid rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    box-shadow: 0px 29px 106.9px -40px rgba(0, 0, 0, 0.3);
+  }
 }
 .nextjs-portal {
   display: none !important;

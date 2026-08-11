@@ -1,3 +1,4 @@
+// components/sections/MarqueeDivider.tsx
 import Marquee from "@/components/ui/Marquee";
 import MarqueeIcon from "@/components/icons/MarqueeIcon";
 
@@ -17,8 +18,14 @@ const BACK_ITEMS = ["Web Developer", "UI/UX Designer", "Mobile Developer"].flatM
 
 export default function MarqueeDivider() {
   return (
-    <section className="relative my-8 overflow-hidden py-10 sm:my-12 sm:py-14">
-      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 rotate-[4deg] scale-110">
+    <section className="relative my-8 h-[180px] overflow-hidden sm:my-12 sm:h-[220px]">
+      {/* strip belakang - posisi & rotasi eksplisit per breakpoint, TIDAK lagi center bareng depan */}
+      <div
+        className="absolute inset-x-0 -z-0
+                   top-[18%] rotate-[8deg] scale-125
+                   sm:top-[22%] sm:rotate-[6deg] sm:scale-110
+                   lg:top-[28%] lg:rotate-[4deg]"
+      >
         <Marquee
           items={BACK_ITEMS}
           direction="left"
@@ -28,7 +35,13 @@ export default function MarqueeDivider() {
         />
       </div>
 
-      <div className="relative rotate-[-3deg] scale-110">
+      {/* strip depan - posisi & rotasi eksplisit, di bawah strip belakang secara vertikal */}
+      <div
+        className="absolute inset-x-0 z-10
+                   top-[25%] -rotate-[8deg] scale-125
+                   sm:top-[52%] sm:-rotate-[6deg] sm:scale-110
+                   lg:top-[31%] lg:-rotate-[4deg]"
+      >
         <Marquee
           items={FRONT_ITEMS}
           direction="right"
