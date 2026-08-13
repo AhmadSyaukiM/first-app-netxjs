@@ -15,6 +15,12 @@
 body {
   cursor: url('/images/1.png') 0 0, auto;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+html {
+  overflow-x: clip;
 }
 
 button,
