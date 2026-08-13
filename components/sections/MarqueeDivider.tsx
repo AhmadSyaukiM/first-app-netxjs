@@ -35,7 +35,7 @@ export default function MarqueeDivider() {
       {/* Background strip */}
       <div
         className="absolute inset-x-0 top-[18%] -z-0 w-full
-                   rotate-[8deg] scale-125
+                   rotate-[8deg] scale-110
                    sm:top-[22%] sm:rotate-[6deg] sm:scale-110
                    lg:top-[28%] lg:rotate-[4deg]"
       >
