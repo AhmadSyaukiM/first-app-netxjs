@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" className={geist.variable}>
-      <body className="relative min-h-screen antialiased font-sans text-black">
+      <body className="relative min-h-screen overflow-x-hidden antialiased font-sans text-black">
         <GradientBlobs />
         <DotGridBackground />
         <Navbar />
