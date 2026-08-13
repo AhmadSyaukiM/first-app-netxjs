@@ -28,12 +28,12 @@ export default function ScrollIndicator() {
               </motion.div>
             ) : null}
 
-            <div className="flex h-14 w-8 items-start justify-center rounded-full border-2 border-black/70 p-2">
+            <div className="flex h-14 w-8 items-start justify-center rounded-full border-1 border-black/50 p-2">
               {/* spring lebih lembut - stiffness diturunkan, damping dinaikkan */}
               <motion.div
                 animate={{ y: direction === "down" ? 12 : 0 }}
                 transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.8 }}
-                className="h-2.5 w-1.5 rounded-full border-2 border-black/70 bg-transparent"
+                className="h-2.5 w-1.5 rounded-full border-1 border-black/50 bg-transparent"
               />
             </div>
 

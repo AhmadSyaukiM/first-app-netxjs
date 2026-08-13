@@ -2,29 +2,34 @@ import FadeIn from "@/components/ui/FadeIn";
 import ProfileCard from "@/components/ui/ProfileCard";
 import ConnectPanel from "@/components/ui/ConnectPanel";
 import WhatIDo from "@/components/sections/WhatIDo";
+import SkillSet from "@/components/sections/SkillSet";
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden">
-      {/* Horizontal atas - full lebar section, pakai inset-x-0 (bukan w-screen) */}
+    <section id="about" className="relative">
+      {/* Horizontal atas - top-anchored, stabil */}
       <div
         className="pointer-events-none absolute inset-x-0 h-[1.5px] bg-black/30
                    top-[25px] 
                    sm:top-[600px] lg:top-[10px]"
       />
 
-      {/* Vertical - tidak berubah, sudah aman karena pakai left-[%] + height pixel */}
+      {/* Vertical - top-anchored + height tetap, stabil */}
       <div
-        className="pointer-events-none absolute w-[1.5px] bg-black/30
-                   left-[94%] top-[25px] h-[1175px]
+        className="pointer-events-none absolute w-[1px] bg-black/30
+                   left-[94%] top-[25px] h-[1218px]
                    sm:left-[65%] sm:top-[600px] sm:h-[500px]
-                   lg:left-[80%] lg:top-[10px] lg:h-[868px]"
+                   lg:left-[80%] lg:top-[10px] lg:h-[882px]"
       />
 
-      {/* Horizontal bawah - full lebar section, pakai inset-x-0 (bukan w-screen) */}
+      {/* Horizontal bawah - SEKARANG juga top-anchored (bukan bottom, bukan margin),
+         posisinya persis = titik akhir garis vertical (top + height vertical),
+         jadi otomatis nyambung rapi dan TIDAK PERNAH bergeser walau konten
+         di bawahnya bertambah/berkurang (expand skill, section baru, dll) */}
       <div
-        className="pointer-events-none absolute inset-x-0 h-[1.5px] bg-black/30
-                   bottom-[805px] sm:bottom-[80px] lg:bottom-[877px]"
+        className="pointer-events-none absolute inset-x-0 h-[1px] bg-black/30
+                   top-[1243px]
+                   sm:top-[1100px] lg:top-[892px]"
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 sm:py-24">
@@ -48,9 +53,8 @@ export default function About() {
           </FadeIn>
         </div>
 
-        {/* section "What I Do" - masih di dalam <section id="about"> yang sama,
-            bukan section terpisah, sesuai request kamu */}
         <WhatIDo />
+        <SkillSet />
       </div>
     </section>
   );
