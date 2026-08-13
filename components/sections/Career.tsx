@@ -24,7 +24,7 @@ const CAREER_ITEMS = [
 
 export default function Career() {
   return (
-      <section id="career" className="relative px-6 py-16 sm:py-24">
+      <section id="career" className="relative overflow-x-hidden px-6 py-16 sm:py-24">
       <DoodleSquiggle className="pointer-events-none absolute -left-6 bottom-16 h-24 w-24 -z-10 opacity-90 sm:h-32 sm:w-32" />
       <DoodleSquiggle className="pointer-events-none absolute -right-6 top-10 h-24 w-24 -z-10 rotate-180 opacity-90 sm:h-32 sm:w-32" />
 
