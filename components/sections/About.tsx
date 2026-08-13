@@ -6,7 +6,7 @@ import SkillSet from "@/components/sections/SkillSet";
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden">
+    <section id="about" className="relative">
       {/* Horizontal atas - top-anchored, stabil */}
       <div
         className="pointer-events-none absolute inset-x-0 h-[1.5px] bg-black/30
