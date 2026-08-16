@@ -1,7 +1,7 @@
 // components/sections/Career.tsx
+import Image from "next/image"; // PERBAIKAN: Menambahkan import Image dari next/image
 import FadeIn from "@/components/ui/FadeIn";
 import AlbumCard from "@/components/ui/AlbumCard";
-import DoodleSquiggle from "@/components/icons/DoodleSquiggle";
 
 const CAREER_ITEMS = [
   {
@@ -24,16 +24,33 @@ const CAREER_ITEMS = [
 
 export default function Career() {
   return (
-      <section id="career" className="relative px-6 py-16 sm:py-24">
-      <DoodleSquiggle className="pointer-events-none absolute -left-6 bottom-16 h-24 w-24 -z-10 opacity-90 sm:h-32 sm:w-32" />
-      <DoodleSquiggle className="pointer-events-none absolute -right-6 top-10 h-24 w-24 -z-10 rotate-180 opacity-90 sm:h-32 sm:w-32" />
+    <section id="career" className="relative px-6 py-16 sm:py-24">
+      {/* doodle kiri - bawah */}
+      <Image
+        src="/images/doodle.png"
+        alt=""
+        width={340}
+        height={290}
+        aria-hidden
+        className="pointer-events-none absolute -left-6 bottom-0 -z-10 h-auto w-44 -scale-x-100 opacity-90 sm:w-122"
+      />
+
+      {/* doodle kanan - atas, dibalik horizontal supaya variasi arahnya beda */}
+      <Image
+        src="/images/doodle.png"
+        alt=""
+        width={340}
+        height={290}
+        aria-hidden
+        className="pointer-events-none absolute -right-6 -top-32 -z-10 h-auto w-44  opacity-90 sm:w-122"
+      />
 
       <div className="mx-auto max-w-3xl text-center">
         <FadeIn>
           <p className="text-4xl font-extrabold text-black sm:text-5xl">
             04 . <span className="text-primary">CAREER PATH</span>
           </p>
-          <h2 className="mt-1 text-2xl font-extrabold uppercase text-black sm:text-3xl">
+          <h2 className="mt-1 text-3xl font-extrabold uppercase text-black sm:text-3xl">
             My Experience
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-gray-600 sm:text-base">
@@ -46,7 +63,7 @@ export default function Career() {
       {/* ===== TIMELINE ===== */}
       <div className="relative mx-auto mt-14 max-w-5xl">
         {/* garis vertical - sedikit lebih tebal */}
-        <div className="absolute left-[7px] top-2 h-[calc(100%-16px)] w-[2.5px] bg-primary/40 sm:left-1/2 sm:-translate-x-1/2" />
+        <div className="absolute left-[9px] top-2 h-[calc(100%-16px)] w-[2.5px] bg-primary/40 sm:left-1/2 sm:-translate-x-1/2" />
 
         <div className="flex flex-col gap-20 sm:gap-24">
           {CAREER_ITEMS.map((item, idx) => {

@@ -2,6 +2,7 @@ import Hero from "@/components/sections/Hero";
 import MarqueeDivider from "@/components/sections/MarqueeDivider";
 import About from "@/components/sections/About";
 import Career from "@/components/sections/Career";
+import Project from "@/components/sections/Project";
 import Logo from "@/components/ui/Logo";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <MarqueeDivider />
       <About />
       <Career />
+      <Project />
     </div>
   );
 }
