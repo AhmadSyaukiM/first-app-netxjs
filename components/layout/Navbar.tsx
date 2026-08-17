@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import HomeIcon from "@/components/icons/HomeIcon";
 import AboutIcon from "@/components/icons/AboutIcon";
@@ -18,15 +19,29 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
+  const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
   const [active, setActive] = useState(0);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLElement | null>(null);
-
-  // flag: true selama proses scroll akibat KLIK navbar (bukan scroll manual user)
-  // supaya scroll-spy tidak "berebut" mengubah active di tengah animasi smooth-scroll
   const isClickScrolling = useRef(false);
   const clickScrollTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  // buat / pakai 1 container tunggal dengan ID unik di document.body,
+  // dan pastikan tidak ada duplikat walau component di-render lebih dari 1x (Strict Mode)
+  useEffect(() => {
+    let el = document.getElementById("navbar-portal-root");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "navbar-portal-root";
+      document.body.appendChild(el);
+    }
+    setPortalNode(el);
+
+    // JANGAN hapus elemennya di cleanup - biarkan tetap ada,
+    // supaya render kedua dari Strict Mode pakai container YANG SAMA,
+    // bukan bikin container baru lagi
+  }, []);
 
   const measurePill = () => {
     const el = itemRefs.current[active];
@@ -53,40 +68,26 @@ export default function Navbar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
-  // ================================
-  // SCROLL-SPY: navbar otomatis ikut section yang sedang dilihat user
-  // ================================
   useEffect(() => {
     const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(
       (el): el is HTMLElement => el !== null
     );
-
     if (sections.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // kalau lagi proses klik-scroll, abaikan dulu, biar tidak konflik
         if (isClickScrolling.current) return;
-
-        // dari semua section yang sedang terlihat, ambil yang paling dominan di layar
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
         if (visible.length > 0) {
           const sectionId = visible[0].target.id;
           const idx = NAV_ITEMS.findIndex((item) => item.id === sectionId);
           if (idx !== -1) setActive(idx);
         }
       },
-      {
-        // area "deteksi" difokuskan ke tengah layar, supaya section dianggap aktif
-        // begitu bagian utamanya sudah masuk area pandang tengah, bukan cuma nyenggol tepi
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      }
+      { rootMargin: "-40% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
-
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
@@ -95,16 +96,13 @@ export default function Navbar() {
     isClickScrolling.current = true;
     setActive(idx);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    // lepas "kunci" scroll-spy setelah animasi smooth-scroll selesai
-    // (kasih jeda aman, karena durasi smooth-scroll bervariasi tergantung jarak)
     clearTimeout(clickScrollTimeout.current);
     clickScrollTimeout.current = setTimeout(() => {
       isClickScrolling.current = false;
     }, 1000);
   };
 
-  return (
+  const navbarElement = (
     <nav
       ref={containerRef}
       className="glass fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2
@@ -136,7 +134,6 @@ export default function Navbar() {
             {!isActive && (
               <span className="glass pointer-events-none absolute inset-0 rounded-full" />
             )}
-
             {!isActive && (
               <span
                 className="pointer-events-none absolute inset-0 z-20 -translate-x-full
@@ -145,7 +142,6 @@ export default function Navbar() {
                            group-hover:translate-x-full"
               />
             )}
-
             <span className="relative z-10 flex items-center gap-2">
               <Icon
                 className={`h-4 w-4 shrink-0 transition-colors duration-300 sm:h-5 sm:w-5 ${
@@ -168,4 +164,19 @@ export default function Navbar() {
       })}
     </nav>
   );
+
+  if (!portalNode) return null;
+  return createPortal(navbarElement, portalNode);
 }
+
+// PS C:\Users\ACER\Desktop\newportfolio_2026\portfolio> Get-ChildItem -Recurse -Include *.tsx,*.ts app,components | Select-String "Navbar"
+
+// app\layout.tsx:6:import Navbar from "@/components/layout/Navbar";
+// app\layout.tsx:28:        <Navbar />
+// components\layout\Navbar.tsx:1:// components/layout/Navbar.tsx
+// components\layout\Navbar.tsx:21:export default function Navbar() {
+// components\layout\Navbar.tsx:33:    let el = document.getElementById("navbar-portal-root");
+// components\layout\Navbar.tsx:36:      el.id = "navbar-portal-root";
+// components\layout\Navbar.tsx:105:  const navbarElement = (
+// components\layout\Navbar.tsx:169:  return createPortal(navbarElement, portalNode);
+

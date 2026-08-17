@@ -4,6 +4,7 @@ import About from "@/components/sections/About";
 import Career from "@/components/sections/Career";
 import Project from "@/components/sections/Project";
 import InterestContact from "@/components/sections/InterestContact";
+import Contact from "@/components/sections/Contact";
 import Logo from "@/components/ui/Logo";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <Career />
       <Project />
       <InterestContact />
+      <Contact />
     </div>
   );
 }

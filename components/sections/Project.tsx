@@ -107,7 +107,7 @@ export default function Project() {
     <section id="project" className="relative px-6 py-16 sm:py-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-20 top-40 -z-10 h-64 w-64 rounded-full bg-primary/50 blur-[90px] sm:-right-24 sm:h-80 sm:w-80"
+        className="pointer-events-none absolute -left-27 top-0 -z-10 h-64 w-64 rounded-full bg-primary/50 blur-[90px] sm:top-[90px] sm:h-90 sm:w-90 sm:left-[-87px]"
       />
 
       <div className="pointer-events-none absolute inset-x-0 top-[10px] h-[1px] bg-black/30" />

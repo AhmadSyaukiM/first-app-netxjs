@@ -13,13 +13,11 @@ export const metadata: Metadata = {
   description: "Portfolio Ahmad Syauki Mubarok",
 };
 
-// INI YANG HILANG - wajib ada supaya browser mobile render sesuai lebar asli device
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
 };
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
