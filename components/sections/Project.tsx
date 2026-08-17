@@ -21,8 +21,38 @@ const PROJECTS = [
     description:
       "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
     image: "/images/proje.png",
-    viewUrl: "#",
+    viewUrl: "https://movie-taupe-chi.vercel.app/",
     linkUrl: "#",
+  },
+  {
+    category: "Website" as Category,
+    title: "Foranggis",
+    badge: "Web Development",
+    description:
+      "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
+    image: "/images/foranggis1.png",
+    viewUrl: "https://movie-taupe-chi.vercel.app/",
+    linkUrl: "https://github.com/AhmadSyaukiM/movie",
+  },
+  {
+    category: "Website" as Category,
+    title: "Qrify",
+    badge: "Web Development",
+    description:
+      "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
+    image: "/images/qrify.png",
+    viewUrl: "https://q-codex.vercel.app/",
+    linkUrl: "https://github.com/AhmadSyaukiM/Q-CodeX-QR-Generate",
+  },
+  {
+    category: "Website" as Category,
+    title: "Rumah Laundry",
+    badge: "Web Development",
+    description:
+      "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
+    image: "/images/qrify.png",
+    viewUrl: "https://q-codex.vercel.app/",
+    linkUrl: "https://github.com/AhmadSyaukiM/rumah_laundry",
   },
   {
     category: "UI/UX Design" as Category,
@@ -80,8 +110,9 @@ export default function Project() {
         className="pointer-events-none absolute -right-20 top-40 -z-10 h-64 w-64 rounded-full bg-primary/50 blur-[90px] sm:-right-24 sm:h-80 sm:w-80"
       />
 
-      <div className="pointer-events-none absolute inset-x-0 h-[1.5px] bg-black/30 top-[10px]" />
-      <div className="pointer-events-none absolute w-[1.5px] bg-black/30 left-[92%] top-[10px] h-[600px] sm:left-[85%] lg:left-[80%]" />
+      <div className="pointer-events-none absolute inset-x-0 top-[10px] h-[1px] bg-black/30" />
+      <div className="pointer-events-none absolute left-[96%] top-[10px] h-[968px] w-[1px] bg-black/30 sm:left-[85%] lg:left-[80%] sm:h-[750px]" />
+      <div className="pointer-events-none absolute inset-x-0 top-[977px] h-[1px] bg-black/30 sm:top-[760]" />
 
       <div className="mx-auto max-w-3xl text-center">
         <FadeIn>

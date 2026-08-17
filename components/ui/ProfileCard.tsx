@@ -71,25 +71,33 @@ export default function ProfileCard() {
 
             {/* Download CV - bump lebih halus + shine sweep seperti button Contact */}
             <motion.button
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="group relative mt-4 flex w-full items-center justify-center gap-2
-                         overflow-hidden rounded-full bg-black py-3 text-sm font-semibold
-                         text-white shadow-md hover:shadow-lg"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                Download CV
-                <FaArrowUpFromBracket size={12} />
-              </span>
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            onClick={() => {
+              const link = document.createElement("a");
+              link.href = "/cv/CV_Ahmad_Syauki_Mubarokq.pdf";
+              link.download = "CV_Ahmad_Syauki_Mubarokq.pdf";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+            className="group relative mt-4 flex w-full items-center justify-center gap-2
+                      overflow-hidden rounded-full bg-black py-3 text-sm font-semibold
+                      text-white shadow-md hover:shadow-lg"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              Download CV
+              <FaArrowUpFromBracket size={12} />
+            </span>
 
-              <span
-                className="pointer-events-none absolute inset-0 z-20 -translate-x-full
-                           bg-gradient-to-r from-transparent via-white/25 to-transparent
-                           transition-transform duration-700 ease-out
-                           group-hover:translate-x-full"
-              />
-            </motion.button>
+            <span
+              className="pointer-events-none absolute inset-0 z-20 -translate-x-full
+                        bg-gradient-to-r from-transparent via-white/25 to-transparent
+                        transition-transform duration-700 ease-out
+                        group-hover:translate-x-full"
+            />
+          </motion.button>
           </div>
         </div>
       </motion.div>

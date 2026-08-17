@@ -1,6 +1,9 @@
+// components/ui/ProjectCard.tsx
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { FaRegEye, FaLink } from "react-icons/fa6";
 
 type ProjectCardProps = {
@@ -11,53 +14,86 @@ type ProjectCardProps = {
 };
 
 export default function ProjectCard({ image, title, viewUrl, linkUrl }: ProjectCardProps) {
+  const [cardHovered, setCardHovered] = useState(false);
+  const [hoveredBtn, setHoveredBtn] = useState<"view" | "link" | null>(null);
+
   return (
-    <div className="relative h-full w-full">
-      {/* layer glass belakang - lebih tebal offset-nya, border jelas, biar 2 lapis card kelihatan */}
-      <div className="glass absolute -bottom-4 -right-4 h-full w-full rounded-3xl border-2 border-white/60" />
+    <div className="relative h-full w-full overflow-hidden rounded-[2rem]">
+      {/* layer blur terpisah */}
+      <div className="glass absolute inset-0 rounded-[2rem]" />
 
-      <div className="group relative h-full w-full overflow-hidden rounded-3xl shadow-xl">
-        <Image src={image} alt={title} fill className="object-cover" />
-
-        {/* overlay "air naik" - height dari 0% ke 100%, dari bawah ke atas */}
+      <div className="relative h-full w-full p-3">
         <div
-          className="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10
-                     transition-[height] duration-500 ease-out
-                     group-hover:h-full"
-        />
+          onMouseEnter={() => setCardHovered(true)}
+          onMouseLeave={() => {
+            setCardHovered(false);
+            setHoveredBtn(null);
+          }}
+          className="relative h-full w-full overflow-hidden rounded-3xl shadow-xl border-2 border-black/10"
+        >
+          <Image src={image} alt={title} fill className="object-cover" />
 
-        {/* icon-icon - muncul MENYUSUL setelah overlay mulai naik, delay sedikit */}
-        <div className="absolute inset-0 flex items-center justify-center gap-3">
-          {viewUrl && (
-            <a
-              href={viewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="flex h-11 w-11 translate-y-4 items-center justify-center rounded-xl bg-primary text-white opacity-0 shadow-lg
-                         transition-all duration-500 ease-out delay-150
-                         hover:brightness-95
-                         group-hover:translate-y-0 group-hover:opacity-100"
-              aria-label="View project"
+          {/* overlay "air naik" */}
+          <motion.div
+            animate={{ height: cardHovered ? "100%" : "0%" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10"
+          />
+
+          {/* PERBAIKAN: Kontainer dibuat fullscreen (inset-0) & terpusat sempurna di tengah (items-center justify-center) */}
+          <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none">
+            <motion.div
+              animate={{ 
+                y: cardHovered ? 0 : 30, 
+                opacity: cardHovered ? 1 : 0 
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="flex gap-4 pointer-events-auto"
             >
-              <FaRegEye size={17} />
-            </a>
-          )}
-          {linkUrl && (
-            <a
-              href={linkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="flex h-11 w-11 translate-y-4 items-center justify-center rounded-xl bg-primary text-white opacity-0 shadow-lg
-                         transition-all duration-500 ease-out delay-[220ms]
-                         hover:brightness-95
-                         group-hover:translate-y-0 group-hover:opacity-100"
-              aria-label="Project link"
-            >
-              <FaLink size={16} />
-            </a>
-          )}
+              {viewUrl && (
+                <motion.a
+                  href={viewUrl}
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  onMouseEnter={() => setHoveredBtn("view")}
+                  onMouseLeave={() => setHoveredBtn(null)}
+                  animate={{ scale: hoveredBtn === "view" ? 1.1 : 1 }}
+                  whileTap={{ scale: 0.85 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 14 }}
+                  className="relative flex h-11 w-11 items-center justify-center overflow-hidden border-1 border-white rounded-xl bg-primary text-white shadow-lg"
+                  aria-label="View project"
+                >
+                  <motion.span
+                    animate={{ height: hoveredBtn === "view" ? "100%" : "0%" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="pointer-events-none absolute inset-x-0 bottom-0 bg-black/25"
+                  />
+                  <FaRegEye size={17} className="relative z-10" />
+                </motion.a>
+              )}
+              {linkUrl && (
+                <motion.a
+                  href={linkUrl}
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  onMouseEnter={() => setHoveredBtn("link")}
+                  onMouseLeave={() => setHoveredBtn(null)}
+                  animate={{ scale: hoveredBtn === "link" ? 1.1 : 1 }}
+                  whileTap={{ scale: 0.85 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 14 }}
+                  className="relative flex h-11 w-11 items-center justify-center overflow-hidden border-1 border-white rounded-xl bg-primary text-white shadow-lg"
+                  aria-label="Project link"
+                >
+                  <motion.span
+                    animate={{ height: hoveredBtn === "link" ? "100%" : "0%" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="pointer-events-none absolute inset-x-0 bottom-0 bg-black/25"
+                  />
+                  <FaLink size={16} className="relative z-10" />
+                </motion.a>
+              )}
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>

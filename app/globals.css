@@ -14,7 +14,7 @@
 } */
 body {
   cursor: url('/images/1.png') 0 0, auto;
-  overflow-x: hidden;
+  overflow-x: clip;   /* ganti dari hidden ke clip */
   width: 100%;
   max-width: 100%;
 }

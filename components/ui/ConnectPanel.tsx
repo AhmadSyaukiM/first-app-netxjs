@@ -2,15 +2,15 @@ import { FaInstagram, FaFacebook, FaGithub, FaLinkedin, FaDiscord } from "react-
 
 const ROWS = [
   [
-    { icon: FaInstagram, label: "Instagram", href: "https://instagram.com/username" },
-    { icon: FaFacebook, label: "Facebook", href: "https://facebook.com/username" },
+    { icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/ahmdsyauki.m/" },
+    { icon: FaFacebook, label: "Facebook", href: "https://www.facebook.com/share/1UGJxcmMmF/" },
   ],
   [
-    { icon: FaGithub, label: "Github", href: "https://github.com/username" },
-    { icon: FaLinkedin, label: "Linkedin", href: "https://linkedin.com/in/username" },
+    { icon: FaGithub, label: "Github", href: "https://github.com/AhmadSyaukiM" },
+    { icon: FaLinkedin, label: "Linkedin", href: "https://www.linkedin.com/in/ahmdsyaukim " },
   ],
   [
-    { icon: FaDiscord, label: "Discord", href: "https://discord.com/users/username" },
+    { icon: FaDiscord, label: "Discord", href: "https://discord.com/users/1035460937970364516" },
   ],
 ];
 
