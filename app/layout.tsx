@@ -21,8 +21,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={geist.variable}>
-      <body className="relative min-h-screen w-full max-w-full overflow-x-clip bg-background font-sans text-black">
+    // overflow-x-clip SEKARANG di <html>, bukan di <body>
+    <html lang="id" className={`${geist.variable} overflow-x-clip`}>
+      <body className="relative min-h-screen w-full max-w-full bg-background font-sans text-black">
         <GradientBlobs />
         <DotGridBackground />
         <Navbar />

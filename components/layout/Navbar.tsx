@@ -1,4 +1,3 @@
-// components/layout/Navbar.tsx
 "use client";
 
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
@@ -22,13 +21,12 @@ export default function Navbar() {
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
   const [active, setActive] = useState(0);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
+  const [bottomOffset, setBottomOffset] = useState(24);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLElement | null>(null);
   const isClickScrolling = useRef(false);
   const clickScrollTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  // buat / pakai 1 container tunggal dengan ID unik di document.body,
-  // dan pastikan tidak ada duplikat walau component di-render lebih dari 1x (Strict Mode)
   useEffect(() => {
     let el = document.getElementById("navbar-portal-root");
     if (!el) {
@@ -37,10 +35,33 @@ export default function Navbar() {
       document.body.appendChild(el);
     }
     setPortalNode(el);
+  }, []);
 
-    // JANGAN hapus elemennya di cleanup - biarkan tetap ada,
-    // supaya render kedua dari Strict Mode pakai container YANG SAMA,
-    // bukan bikin container baru lagi
+  // Hitung posisi Footer secara realtime agar navbar berhenti tepat di atasnya
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = document.querySelector("footer");
+      if (!footer) return;
+
+      const footerRect = footer.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      if (footerRect.top < viewportHeight) {
+        const overlap = viewportHeight - footerRect.top;
+        setBottomOffset(overlap + 24);
+      } else {
+        setBottomOffset(24);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const measurePill = () => {
@@ -59,13 +80,11 @@ export default function Navbar() {
       return () => cancelAnimationFrame(raf2);
     });
     return () => cancelAnimationFrame(raf1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
   useEffect(() => {
     window.addEventListener("resize", measurePill);
     return () => window.removeEventListener("resize", measurePill);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
   useEffect(() => {
@@ -105,8 +124,8 @@ export default function Navbar() {
   const navbarElement = (
     <nav
       ref={containerRef}
-      className="glass fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2
-                 items-center gap-2.5 sm:gap-3 rounded-full px-3 py-3"
+      style={{ bottom: `${bottomOffset}px` }}
+      className="glass fixed left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5 rounded-full px-3 py-3 transition-[bottom] duration-75 ease-out sm:gap-3"
     >
       <motion.div
         animate={{ left: pillStyle.left, width: pillStyle.width }}
@@ -126,21 +145,15 @@ export default function Navbar() {
             }}
             onClick={() => handleNavClick(idx, item.id)}
             aria-label={item.label}
-            className={`group relative z-10 flex h-11 shrink-0 items-center justify-center
-                        gap-2 overflow-hidden rounded-full
-                        sm:h-12
-                        ${isActive ? "px-4 sm:px-5" : "w-11 sm:w-12"}`}
+            className={`group relative z-10 flex h-11 shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full sm:h-12 ${
+              isActive ? "px-4 sm:px-5" : "w-11 sm:w-12"
+            }`}
           >
             {!isActive && (
               <span className="glass pointer-events-none absolute inset-0 rounded-full" />
             )}
             {!isActive && (
-              <span
-                className="pointer-events-none absolute inset-0 z-20 -translate-x-full
-                           bg-gradient-to-r from-transparent via-white/70 to-transparent
-                           transition-transform duration-700 ease-out
-                           group-hover:translate-x-full"
-              />
+              <span className="pointer-events-none absolute inset-0 z-20 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
             )}
             <span className="relative z-10 flex items-center gap-2">
               <Icon
@@ -168,15 +181,3 @@ export default function Navbar() {
   if (!portalNode) return null;
   return createPortal(navbarElement, portalNode);
 }
-
-// PS C:\Users\ACER\Desktop\newportfolio_2026\portfolio> Get-ChildItem -Recurse -Include *.tsx,*.ts app,components | Select-String "Navbar"
-
-// app\layout.tsx:6:import Navbar from "@/components/layout/Navbar";
-// app\layout.tsx:28:        <Navbar />
-// components\layout\Navbar.tsx:1:// components/layout/Navbar.tsx
-// components\layout\Navbar.tsx:21:export default function Navbar() {
-// components\layout\Navbar.tsx:33:    let el = document.getElementById("navbar-portal-root");
-// components\layout\Navbar.tsx:36:      el.id = "navbar-portal-root";
-// components\layout\Navbar.tsx:105:  const navbarElement = (
-// components\layout\Navbar.tsx:169:  return createPortal(navbarElement, portalNode);
-
