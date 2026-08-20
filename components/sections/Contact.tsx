@@ -5,18 +5,21 @@ import ContactInfo from "@/components/ui/ContactInfo";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
+    // pb dinaikkan cukup besar - navbar tinggi ~44-48px + bottom-24px gap ≈ perlu
+    // ruang aman minimal ~110-130px di mobile supaya badge terakhir tidak pernah
+    // tertutup navbar sebelum Footer masuk viewport
+    <section id="contact" className="relative px-6 pb-36 pt-16 sm:pb-28 sm:pt-24">
       <Image
         src="/images/doodle.png"
         alt=""
         width={140}
         height={90}
         aria-hidden
-        className="pointer-events-none absolute right-2 top-10 -z-10 h-auto w-20 opacity-90 sm:right-0 sm:w-92"
+        className="pointer-events-none absolute right-0 top-0 -z-10 h-auto w-80 opacity-90 sm:right-0 sm:w-92"
       />
 
-      <div className="pointer-events-none absolute left-[8%] top-[10px] h-[759px] w-[1.5px] bg-black/30 sm:left-[15%] lg:left-[20%]" />
-      <div className="pointer-events-none absolute inset-x-0 top-[769px] h-[1.5px] bg-black/30" />
+      <div className="pointer-events-none absolute left-[96%] top-0 h-[1235px] w-[1px] bg-black/30 sm:left-[5%] sm:h-[769px] lg:left-[80%]" />
+      <div className="pointer-events-none absolute inset-x-0 top-[1235px] h-[1.5px] bg-black/30 sm:top-[769px]" />
 
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center gap-14 lg:flex-row lg:items-start lg:justify-center lg:gap-20">

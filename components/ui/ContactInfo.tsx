@@ -9,12 +9,6 @@ const CONTACT_ITEMS = [
     href: "mailto:ahmdsyaukim@gmail.com",
   },
   {
-    icon: FaPhone,
-    label: "Contact",
-    value: "+62 895 3217 49144",
-    href: "tel:+6289532174914",
-  },
-  {
     icon: FaLocationDot,
     label: "Location",
     value: "DKI Jakarta, Jakarta Timur",

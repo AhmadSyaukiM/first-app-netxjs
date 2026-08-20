@@ -10,7 +10,7 @@ const SERVICES = [
     icon: FaDesktop,
     title: "Web Developer",
     description:
-      "Building responsive, fast, and accessible websites using modern frameworks like Next.js and Tailwind CSS.",
+      "High-quality development of sites at the professional level. ",
   },
   {
     icon: FaMobileScreenButton,
