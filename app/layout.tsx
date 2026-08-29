@@ -1,9 +1,9 @@
-// app/layout.tsx
 import { Geist } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import GradientBlobs from "@/components/ui/GradientBlobs";
 import DotGridBackground from "@/components/ui/DotGridBackground";
 import Navbar from "@/components/layout/Navbar";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
@@ -21,13 +21,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // overflow-x-clip SEKARANG di <html>, bukan di <body>
     <html lang="id" className={`${geist.variable} overflow-x-clip`}>
       <body className="relative min-h-screen w-full max-w-full bg-background font-sans text-black">
-        <GradientBlobs />
-        <DotGridBackground />
-        <Navbar />
-        {children}
+        <SmoothScrollProvider>
+          <GradientBlobs />
+          <DotGridBackground />
+          <Navbar />
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );

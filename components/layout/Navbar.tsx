@@ -1,5 +1,5 @@
 "use client";
-
+import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -8,6 +8,7 @@ import AboutIcon from "@/components/icons/AboutIcon";
 import CareerIcon from "@/components/icons/CareerIcon";
 import ProjectIcon from "@/components/icons/ProjectIcon";
 import ContactIcon from "@/components/icons/ContactIcon";
+import { useLenis } from "@/components/providers/SmoothScrollProvider";
 
 const NAV_ITEMS = [
   { icon: HomeIcon, label: "Home", id: "home" },
@@ -18,6 +19,9 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const hiddenOnPaths = ["/error-404"];
+  const lenis = useLenis();
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
   const [active, setActive] = useState(0);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
@@ -114,11 +118,18 @@ export default function Navbar() {
   const handleNavClick = (idx: number, id: string) => {
     isClickScrolling.current = true;
     setActive(idx);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    const target = document.getElementById(id);
+    if (target && lenis) {
+      lenis.scrollTo(target, { duration: 1.2 });
+    } else if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
     clearTimeout(clickScrollTimeout.current);
     clickScrollTimeout.current = setTimeout(() => {
       isClickScrolling.current = false;
-    }, 1000);
+    }, 1200);
   };
 
   const navbarElement = (
@@ -177,7 +188,8 @@ export default function Navbar() {
       })}
     </nav>
   );
-
+  
   if (!portalNode) return null;
+  if (hiddenOnPaths.includes(pathname)) return null;
   return createPortal(navbarElement, portalNode);
 }

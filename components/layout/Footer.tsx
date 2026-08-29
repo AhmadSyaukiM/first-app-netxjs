@@ -2,10 +2,16 @@
 
 import { motion } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa6";
+import { useLenis } from "@/components/providers/SmoothScrollProvider";
 
 export default function Footer() {
+  const lenis = useLenis();
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.4 });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (

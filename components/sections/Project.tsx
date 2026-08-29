@@ -22,7 +22,7 @@ const PROJECTS = [
       "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
     image: "/images/proje.png",
     viewUrl: "https://movie-taupe-chi.vercel.app/",
-    linkUrl: "#",
+    linkUrl: "/error-404",
   },
   {
     category: "Website" as Category,
@@ -50,7 +50,7 @@ const PROJECTS = [
     badge: "Web Development",
     description:
       "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
-    image: "/images/qrify.png",
+    image: "/images/laundry_app.png",
     viewUrl: "https://q-codex.vercel.app/",
     linkUrl: "https://github.com/AhmadSyaukiM/rumah_laundry",
   },
