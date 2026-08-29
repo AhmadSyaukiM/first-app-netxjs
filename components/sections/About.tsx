@@ -7,14 +7,12 @@ import SkillSet from "@/components/sections/SkillSet";
 export default function About() {
   return (
     <section id="about" className="relative">
-      {/* Horizontal atas - top-anchored, stabil */}
       <div
         className="pointer-events-none absolute inset-x-0 h-[1.5px] bg-black/30
                    top-[25px] 
                    sm:top-[600px] lg:top-[10px]"
       />
 
-      {/* Vertical - top-anchored + height tetap, stabil */}
       <div
         className="pointer-events-none absolute w-[1px] bg-black/30
                    left-[94%] top-[25px] h-[1218px]
@@ -22,10 +20,6 @@ export default function About() {
                    lg:left-[80%] lg:top-[10px] lg:h-[882px]"
       />
 
-      {/* Horizontal bawah - SEKARANG juga top-anchored (bukan bottom, bukan margin),
-         posisinya persis = titik akhir garis vertical (top + height vertical),
-         jadi otomatis nyambung rapi dan TIDAK PERNAH bergeser walau konten
-         di bawahnya bertambah/berkurang (expand skill, section baru, dll) */}
       <div
         className="pointer-events-none absolute inset-x-0 h-[1px] bg-black/30
                    top-[1243px]

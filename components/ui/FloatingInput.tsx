@@ -35,8 +35,7 @@ export default function FloatingInput({
 
   return (
     <div className="relative">
-      {/* label - default: besar, menyatu di baris field (seperti placeholder).
-         floating: kecil, naik ke atas field */}
+      
       <label
         className={`pointer-events-none absolute left-0 font-bold text-black transition-all duration-300 ${
           isFloating
@@ -47,7 +46,7 @@ export default function FloatingInput({
         {label}
       </label>
 
-      {/* baris field: input/textarea + icon di kanan, garis bawah menyatu 1 baris penuh */}
+     
       <div className="flex items-end justify-between gap-2 border-b border-black/20 pb-2 pt-7 transition-colors duration-300 focus-within:border-primary">
         {as === "textarea" ? (
           <textarea rows={2} {...sharedProps} />

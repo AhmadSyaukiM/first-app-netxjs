@@ -19,7 +19,6 @@ export default function ProjectCard({ image, title, viewUrl, linkUrl }: ProjectC
 
   return (
     <div className="relative h-full w-full overflow-hidden rounded-[2rem]">
-      {/* layer blur terpisah */}
       <div className="glass absolute inset-0 rounded-[2rem]" />
 
       <div className="relative h-full w-full p-3">
@@ -33,14 +32,12 @@ export default function ProjectCard({ image, title, viewUrl, linkUrl }: ProjectC
         >
           <Image src={image} alt={title} fill className="object-cover" />
 
-          {/* overlay "air naik" */}
           <motion.div
             animate={{ height: cardHovered ? "100%" : "0%" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10"
           />
 
-          {/* PERBAIKAN: Kontainer dibuat fullscreen (inset-0) & terpusat sempurna di tengah (items-center justify-center) */}
           <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none">
             <motion.div
               animate={{ 

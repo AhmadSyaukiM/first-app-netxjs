@@ -18,7 +18,7 @@ const CONTACT_ITEMS = [
 
 export default function ContactInfo() {
   return (
-    // "mx-auto" bikin KOLOM ini center di layar (mobile), tapi ISI di dalamnya tetap left align
+    
     <div className="mx-auto flex w-full max-w-md flex-col items-start text-left lg:mx-0">
       <div className="flex items-center gap-2 rounded-full border border-primary bg-primary/10 py-1.5 pl-1.5 pr-4">
         <div className="h-7 w-7 overflow-hidden rounded-full ring-2 ring-white">
@@ -57,7 +57,7 @@ export default function ContactInfo() {
                 <Icon className="text-primary" size={16} />
               </span>
 
-              {/* flex-col dengan leading-none memastikan label & value nempel rapi, tidak melebar aneh */}
+              
               <span className="flex flex-col items-start justify-center gap-0.5 text-left">
                 <span className="text-xs font-semibold leading-none text-primary">
                   {item.label}

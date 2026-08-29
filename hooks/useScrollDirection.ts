@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const IDLE_DELAY = 800;
-const MIN_DELTA = 4; // pergeseran di bawah ini diabaikan - biar ga kepancing overscroll bounce
+const MIN_DELTA = 4;
 
 export function useScrollDirection() {
   const [direction, setDirection] = useState<"up" | "down">("down");

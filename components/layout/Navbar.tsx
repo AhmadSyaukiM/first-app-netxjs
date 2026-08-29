@@ -41,7 +41,6 @@ export default function Navbar() {
     setPortalNode(el);
   }, []);
 
-  // Hitung posisi Footer secara realtime agar navbar berhenti tepat di atasnya
   useEffect(() => {
     const handleScroll = () => {
       const footer = document.querySelector("footer");

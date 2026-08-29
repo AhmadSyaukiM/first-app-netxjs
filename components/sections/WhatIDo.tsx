@@ -5,7 +5,6 @@ import ServiceTimeline from "@/components/ui/ServiceTimeline";
 export default function WhatIDo() {
   return (
     <div className="relative mt-24 sm:mt-32">
-      {/* circle dekoratif primary + black - nempel di pojok kiri layar */}
       <div
         aria-hidden
         className="pointer-events-none absolute -left-23 top-32 -z-10 sm:-left-80 sm:-top-8"

@@ -25,7 +25,6 @@ export default function SkillBadge({ icon: Icon, label, iconColor, iconBg }: Ski
 
       <span className="text-sm font-semibold text-black">{label}</span>
 
-      {/* shine sweep saat hover */}
       <span
         className="pointer-events-none absolute inset-0 z-10 -translate-x-full
                    bg-gradient-to-r from-transparent via-white/70 to-transparent

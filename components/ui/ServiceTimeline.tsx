@@ -1,4 +1,3 @@
-// components/ui/ServiceTimeline.tsx
 "use client";
 
 import { useState } from "react";
@@ -59,7 +58,6 @@ export default function ServiceTimeline() {
         ))}
       </div>
 
-      {/* daftar layanan */}
       <div className="flex flex-1 flex-col gap-4 sm:gap-5">
         {SERVICES.map((service, idx) => {
           const Icon = service.icon;

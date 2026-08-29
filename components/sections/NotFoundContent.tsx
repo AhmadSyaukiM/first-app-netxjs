@@ -6,8 +6,7 @@ import TypingText from "@/components/ui/TypingText";
 
 export default function NotFoundContent() {
   return (
-    // "h-full" bukan "min-h-screen" - karena sekarang tinggi diatur oleh flex-1
-    // di parent (page.tsx), bukan section ini sendiri
+   
     <section className="relative flex h-full min-h-[70vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
       <div className="relative z-10">
         <h1 className="text-6xl font-extrabold text-black sm:text-6xl">Page not found</h1>

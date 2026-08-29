@@ -8,7 +8,7 @@ type MarqueeProps = {
   items: ReactNode[];
   direction?: "left" | "right";
   baseSpeed?: number;
-  repeat?: number; // berapa kali pola diulang sebelum di-duplikasi untuk loop
+  repeat?: number; 
   className?: string;
 };
 
@@ -24,7 +24,7 @@ export default function Marquee({
   const speedRef = useRef(0);
   const targetRef = useRef(1);
 
-  // ulang pola "repeat" kali dulu, baru nanti diduplikasi 2x untuk seamless loop
+  
   const loopedItems = Array.from({ length: repeat }).flatMap(() => items);
 
   useEffect(() => {
@@ -46,8 +46,7 @@ export default function Marquee({
 
       let current = x.get() + dirMultiplier * baseSpeed * speedRef.current;
 
-      // wrap seamless: karena kontennya panjang & berpola sama, titik reset ini
-      // jatuh di tengah pola yang identik, jadi tidak terlihat "nyambung"
+      
       if (direction === "left" && current <= -trackWidth) current += trackWidth;
       if (direction === "right" && current >= 0) current -= trackWidth;
 

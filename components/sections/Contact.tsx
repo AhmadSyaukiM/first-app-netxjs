@@ -5,9 +5,6 @@ import ContactInfo from "@/components/ui/ContactInfo";
 
 export default function Contact() {
   return (
-    // pb dinaikkan cukup besar - navbar tinggi ~44-48px + bottom-24px gap ≈ perlu
-    // ruang aman minimal ~110-130px di mobile supaya badge terakhir tidak pernah
-    // tertutup navbar sebelum Footer masuk viewport
     <section id="contact" className="relative px-6 pb-36 pt-16 sm:pb-28 sm:pt-24">
       <Image
         src="/images/doodle.png"

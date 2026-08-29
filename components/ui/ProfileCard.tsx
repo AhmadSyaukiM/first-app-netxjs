@@ -9,7 +9,6 @@ const TAGS = ["UI/UX Design", "Full Stack Developer", "Mobile Dev"];
 export default function ProfileCard() {
   return (
     <div className="relative">
-      {/* circle gradient primary di belakang - full circle, tidak lagi bisa kepotong */}
       <div
         aria-hidden
         className="absolute -bottom-0 left-1/2 -z-10 h-72 w-72 -translate-x-1/5 rounded-full bg-primary/100 blur-[80px]"
@@ -38,7 +37,6 @@ export default function ProfileCard() {
               className="h-56 w-full object-cover"
             />
 
-            {/* badge - lebih gelap, bukan glass terang lagi */}
             <div className="absolute left-2.5 top-2.5 flex items-center gap-1.5 rounded-full bg-black/30 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-md border border-white/40">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
@@ -69,7 +67,6 @@ export default function ProfileCard() {
               turning them into useful digital products.
             </p>
 
-            {/* Download CV - bump lebih halus + shine sweep seperti button Contact */}
             <motion.button
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}

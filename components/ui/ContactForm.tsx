@@ -58,7 +58,7 @@ export default function ContactForm() {
 
   return (
     <div className="relative w-full max-w-md">
-      {/* circle blur - pojok kiri belakang card */}
+      
       <div
         aria-hidden
         className="pointer-events-none absolute -left-14 -top-10 -z-10 h-56 w-56 rounded-full bg-primary/50 blur-[80px]"

@@ -1,4 +1,3 @@
-// components/ui/Logo.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -69,8 +68,6 @@ export default function Logo() {
         <polygon points="20,2 4,12 20,22" fill="black" />
       </svg>
 
-      {/* leading-none: matikan line-height ekstra dari font, biar teks & container tetap stabil
-          tingginya walau kontennya berubah-ubah (kosong -> penuh -> kosong lagi) */}
       <span className="tabular-nums leading-none">{text}</span>
 
       <span

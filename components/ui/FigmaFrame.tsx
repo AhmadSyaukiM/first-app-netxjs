@@ -1,4 +1,3 @@
-// components/ui/FigmaFrame.tsx
 import { ReactNode } from "react";
 
 export default function FigmaFrame({ children }: { children: ReactNode }) {
@@ -6,10 +5,10 @@ export default function FigmaFrame({ children }: { children: ReactNode }) {
     <span className="relative -rotate-6 inline-flex items-center px-2 py-1">
       <span className="relative z-10">{children}</span>
 
-      {/* garis frame, nempel pas ke konten */}
+     
       <span className="pointer-events-none absolute inset-0 border-2 border-sky-400 rounded-[2px]" />
 
-      {/* 4 handle, presisi di tiap sudut */}
+      
       {[
         "-top-[5px] -left-[5px]",
         "-top-[5px] -right-[5px]",

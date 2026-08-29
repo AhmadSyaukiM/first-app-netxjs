@@ -15,8 +15,8 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
 
   useEffect(() => {
     const instance = new Lenis({
-      duration: 1.1, // durasi easing scroll - makin besar, makin "berat/santai" momentum-nya
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo, halus & natural
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.2,

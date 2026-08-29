@@ -1,4 +1,3 @@
-// components/icons/DoodleSquiggle.tsx
 export default function DoodleSquiggle({ className = "" }: { className?: string }) {
   return (
     <svg

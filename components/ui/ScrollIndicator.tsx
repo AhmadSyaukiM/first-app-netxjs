@@ -1,4 +1,3 @@
-// components/ui/ScrollIndicator.tsx
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -29,7 +28,6 @@ export default function ScrollIndicator() {
             ) : null}
 
             <div className="flex h-14 w-8 items-start justify-center rounded-full border-1 border-black/50 p-2">
-              {/* spring lebih lembut - stiffness diturunkan, damping dinaikkan */}
               <motion.div
                 animate={{ y: direction === "down" ? 12 : 0 }}
                 transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.8 }}

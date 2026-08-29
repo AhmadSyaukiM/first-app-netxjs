@@ -13,66 +13,97 @@ import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 const CATEGORIES = ["All", "UI/UX Design", "Website", "Mobile Application"] as const;
 type Category = (typeof CATEGORIES)[number];
 
-const PROJECTS = [
+
+interface Project {
+  category: Category | Category[];
+  title: string;
+  badge: string[];
+  description: string;
+  image: string;
+  viewUrl: string;
+  linkUrl: string;
+}
+
+const PROJECTS: Project[] = [
   {
-    category: "Website" as Category,
+    category: "Website",
     title: "Simple Movie",
-    badge: "Web Development",
+    badge: ["Web Development"],
     description:
       "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
     image: "/images/proje.png",
     viewUrl: "https://movie-taupe-chi.vercel.app/",
-    linkUrl: "/error-404",
-  },
-  {
-    category: "Website" as Category,
-    title: "Foranggis",
-    badge: "Web Development",
-    description:
-      "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
-    image: "/images/foranggis1.png",
-    viewUrl: "https://movie-taupe-chi.vercel.app/",
     linkUrl: "https://github.com/AhmadSyaukiM/movie",
   },
   {
-    category: "Website" as Category,
-    title: "Qrify",
-    badge: "Web Development",
+    category: "Website",
+    title: "Foranggis",
+    badge: ["Web Development"],
     description:
-      "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
+      "Developing a web forum for Cimanggis residents to share concerns, ideas, and local information. This team project strengthened our collaboration, communication, and task management skills.",
+    image: "/images/foranggis1.png",
+    viewUrl: "https://foranggis.com/",
+    linkUrl: "/error-404",
+  },
+  {
+    category: "Website",
+    title: "Q-Codex",
+    badge: ["Web Development"],
+    description:
+      "Q-Codex is a lightweight QR Code Generator designed for quick and easy sharing. Generate QR codes for URLs or Emails instantly, with no unnecessary steps.",
     image: "/images/qrify.png",
     viewUrl: "https://q-codex.vercel.app/",
     linkUrl: "https://github.com/AhmadSyaukiM/Q-CodeX-QR-Generate",
   },
   {
-    category: "Website" as Category,
+    category: "Website",
     title: "Rumah Laundry",
-    badge: "Web Development",
+    badge: ["Web Development"],
     description:
-      "A movie catalog web app with search, filtering, and detail pages, built with a focus on clean UI and fast performance.",
+      "Rumah Laundry is a web-based laundry management system designed to simplify the management of orders, employees, packages, and customer data in one organized platform.",
     image: "/images/laundry_app.png",
-    viewUrl: "https://q-codex.vercel.app/",
+    viewUrl: "/error-404",
     linkUrl: "https://github.com/AhmadSyaukiM/rumah_laundry",
   },
   {
-    category: "UI/UX Design" as Category,
-    title: "Banking Dashboard",
-    badge: "UI/UX Design",
+    category: ["UI/UX Design", "Website", "Mobile Application"], 
+    title: "Ecomart",
+    badge: ["UI/UX Design", "Web Development", "Mobile Application"], 
     description:
-      "A financial dashboard design focused on clarity, data visualization, and effortless daily transaction management.",
-    image: "/images/project-banking.jpg",
-    viewUrl: "#",
-    linkUrl: "#",
+      "EcoMart is a community-based e-commerce app for residential areas, designed to make everyday grocery shopping easier and more convenient for residents through a dedicated neighborhood marketplace.",
+    image: "/images/ecomart_dash.png",
+    viewUrl: "https://www.figma.com/design/ZBSiPlRMsHaTs60CmDjn8s/Solo-Project?node-id=245-449&t=bFwjgvV8AXIjHnT1-1",
+    linkUrl: "https://github.com/AhmadSyaukiM/EcoMart-Admin",
   },
   {
-    category: "Mobile Application" as Category,
-    title: "Fitness Tracker",
-    badge: "Mobile Application",
+    category: ["UI/UX Design", "Website"],
+    title: "Bentang Altur Teknologia",
+    badge: ["UI/UX Design", "Web Development"],
     description:
-      "A mobile app for tracking workouts and daily activity, built with Flutter for a smooth cross-platform experience.",
-    image: "/images/project-fitness.jpg",
-    viewUrl: "#",
-    linkUrl: "#",
+      "Bentang Altur Teknologia is an interactive company profile website for an IT consulting company, featuring modern design and engaging UI/UX.",
+    image: "/images/bentang.png",
+    viewUrl: "https://www.figma.com/design/RGcvwaXgQHR2uWSqChAUSa/bentang-id---colaborasi?m=auto&t=i8lEYjjvyIbnVWqQ-6",
+    linkUrl: "/error-404",
+  },
+  {
+    category: "Mobile Application",
+    title: "SAM",
+    badge: ["Mobile Application"],
+    description:
+      "Sales Assistant Management System is a web-based application designed to help sales teams manage data, monitor production, and check stock efficiently, making daily sales tasks easier and more organized.",
+    image: "/images/samclone.jpg",
+    viewUrl: "/error-404",
+    linkUrl: "https://drive.google.com/file/d/1mz4Cm4nOgptpI0445PRzjVdVuOgKx_Yy/view?usp=drive_link",
+  },
+  {
+    category: "Mobile Application",
+    title: "Activy",
+    badge: ["Mobile Application"],
+    description:
+      "Activy is a productivity app designed to help users organize their daily schedules and tasks, making their activities more structured and helping them stay on time.",
+    image: "/images/activy_app.png",
+    viewUrl: "https://drive.google.com/file/d/171UjexrD1rpWNyMMSEXJX0G8q6b0ii_T/view?usp=sharing",
+    linkUrl: "https://github.com/AhmadSyaukiM/Activy-Activity-Mobile-Application",
   },
 ];
 
@@ -81,10 +112,15 @@ export default function Project() {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
 
+  
   const filtered =
     activeCategory === "All"
       ? PROJECTS
-      : PROJECTS.filter((p) => p.category === activeCategory);
+      : PROJECTS.filter((p) =>
+          Array.isArray(p.category)
+            ? p.category.includes(activeCategory)
+            : p.category === activeCategory
+        );
 
   const current = filtered[index] ?? filtered[0];
 
@@ -154,7 +190,7 @@ export default function Project() {
 
       <div className="mx-auto mt-16 max-w-6xl">
         <div className="flex flex-col items-center gap-10 sm:flex-row sm:items-start sm:justify-center">
-          {/* wrapper card - SEKARANG lebih lebar (rectangle), bukan persegi */}
+          {/* wrapper card */}
           <div className="flex flex-col items-center gap-5">
             <div className="relative h-64 w-80 overflow-hidden sm:h-72 sm:w-[420px]">
               <AnimatePresence mode="wait" custom={dir}>
@@ -192,7 +228,6 @@ export default function Project() {
                 className="flex flex-col items-center sm:items-start"
               >
                 <div className="flex items-center gap-2">
-                  {/* asterisk icon - looping rotate */}
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
@@ -204,9 +239,17 @@ export default function Project() {
                   </h3>
                 </div>
 
-                <span className="mt-3 inline-block rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
-                  {current.badge}
-                </span>
+                {/* Render badges */}
+                <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+                  {current.badge.map((item, idx) => (
+                    <span
+                      key={idx}
+                      className="inline-block rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
 
                 <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-600 sm:max-w-sm">
                   {current.description}
@@ -214,7 +257,7 @@ export default function Project() {
               </motion.div>
             </AnimatePresence>
 
-            {/* arrow - icon custom, shiny slash hover, bouncy/zoom animation */}
+            {/* arrow buttons */}
             <div className="mt-6 flex items-center gap-3">
               <motion.button
                 onClick={goPrev}

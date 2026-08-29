@@ -1,4 +1,3 @@
-// components/icons/ArrowRightIcon.tsx
 export default function ArrowRightIcon({ className = "" }: { className?: string }) {
   return (
     <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>

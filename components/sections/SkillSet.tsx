@@ -1,4 +1,3 @@
-// components/sections/SkillSet.tsx
 "use client";
 
 import { useState } from "react";
@@ -59,10 +58,9 @@ export default function SkillSet() {
           </p>
         </FadeIn>
 
-        {/* ===== MOBILE (di bawah sm:) - punya expand/collapse ===== */}
+      
         <FadeIn delay={0.15}>
-          {/* "layout" di sini -> perubahan TINGGI container dianimasikan smooth
-             saat badge bertambah/berkurang, bukan snap instan */}
+        
           <motion.div
             layout
             transition={{ layout: { duration: 0.45, ease: "easeInOut" } }}
@@ -120,7 +118,7 @@ export default function SkillSet() {
           </motion.div>
         </FadeIn>
 
-        {/* ===== DESKTOP (sm: ke atas) - selalu semua, tanpa limit ===== */}
+        
         <FadeIn delay={0.15}>
           <div className="mt-8 hidden flex-wrap justify-center gap-3 sm:flex">
             {SKILLS.map((skill) => (

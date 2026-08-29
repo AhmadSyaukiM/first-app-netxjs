@@ -1,4 +1,3 @@
-// components/sections/MarqueeDivider.tsx
 import Marquee from "@/components/ui/Marquee";
 import MarqueeIcon from "@/components/icons/MarqueeIcon";
 
@@ -32,7 +31,7 @@ const BACK_ITEMS = ["Web Developer", "UI/UX Designer", "Mobile Developer"].flatM
 export default function MarqueeDivider() {
   return (
     <section className="relative my-8 h-[180px] w-full overflow-hidden sm:my-12 sm:h-[220px]">
-      {/* Background strip */}
+  
       <div
         className="absolute inset-x-0 top-[18%] -z-0 w-full
                    rotate-[8deg] scale-110
@@ -48,7 +47,7 @@ export default function MarqueeDivider() {
         />
       </div>
 
-      {/* Front strip */}
+  
       <div
         className="absolute inset-x-0 top-[25%] z-10 w-full
                    -rotate-[8deg] scale-125

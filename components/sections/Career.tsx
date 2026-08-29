@@ -1,5 +1,4 @@
-// components/sections/Career.tsx
-import Image from "next/image"; // PERBAIKAN: Menambahkan import Image dari next/image
+import Image from "next/image"; 
 import FadeIn from "@/components/ui/FadeIn";
 import AlbumCard from "@/components/ui/AlbumCard";
 
@@ -25,7 +24,7 @@ const CAREER_ITEMS = [
 export default function Career() {
   return (
     <section id="career" className="relative px-6 py-16 sm:py-24">
-      {/* doodle kiri - bawah */}
+    
       <Image
         src="/images/doodle.png"
         alt=""
@@ -35,7 +34,6 @@ export default function Career() {
         className="pointer-events-none absolute -left-6 bottom-0 -z-10 h-auto w-44 -scale-x-100 opacity-90 sm:w-122"
       />
 
-      {/* doodle kanan - atas, dibalik horizontal supaya variasi arahnya beda */}
       <Image
         src="/images/doodle.png"
         alt=""
@@ -60,9 +58,8 @@ export default function Career() {
         </FadeIn>
       </div>
 
-      {/* ===== TIMELINE ===== */}
+  
       <div className="relative mx-auto mt-14 max-w-5xl">
-        {/* garis vertical - sedikit lebih tebal */}
         <div className="absolute left-[9px] top-2 h-[calc(100%-16px)] w-[2.5px] bg-primary/40 sm:left-1/2 sm:-translate-x-1/2" />
 
         <div className="flex flex-col gap-20 sm:gap-24">
@@ -72,7 +69,6 @@ export default function Career() {
             return (
               <FadeIn key={item.title} delay={idx * 0.1}>
                 <div className="relative sm:grid sm:grid-cols-2 sm:items-start sm:gap-14">
-                  {/* dot timeline - dashed + pulse animation di dalamnya */}
                   <span
                     className="absolute left-0 top-2 z-10 flex h-5 w-5 items-center justify-center
                                rounded-full border-2 border-dashed border-primary bg-white
